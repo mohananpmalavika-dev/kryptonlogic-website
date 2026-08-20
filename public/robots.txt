@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /sitemap.xml
+
+# Sitemaps
+Sitemap: https://kryptonlogic.com/sitemap.xml
+Sitemap: https://www.kryptonlogic.com/sitemap.xml
