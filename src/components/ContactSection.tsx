@@ -94,7 +94,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <div className="font-bold text-white">Call Kollam Office</div>
-                    <div className="text-[11px] text-cyan-accent">+91 85939 44144</div>
+                    <div className="text-[11px] text-cyan-accent">+91 85939 44144 | 011-69266519</div>
                   </div>
                 </a>
 

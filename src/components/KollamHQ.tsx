@@ -67,7 +67,7 @@ export const KollamHQ: React.FC<KollamHQProps> = ({ onOpenContact }) => {
                   <PhoneCall className="w-4 h-4 text-emerald-400 shrink-0" />
                   <div>
                     <strong className="text-white block">Direct Hotline & WhatsApp:</strong>
-                    <span className="text-emerald-400">+91 85939 44144</span>
+                    <span className="text-emerald-400">+91 85939 44144 | 011-69266519</span>
                   </div>
                 </div>
 

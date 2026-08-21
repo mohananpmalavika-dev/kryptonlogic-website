@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <img 
                 src="/kryptonlogic-logo.png" 
                 alt="KryptonLogic" 
-                className="w-full h-full object-contain p-0.5"
+                className="w-full h-full object-cover rounded-[14px]"
               />
             </div>
             <div className="flex flex-col">
@@ -284,7 +284,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="p-2.5 rounded-xl hover:bg-white/5 flex items-center gap-3 text-xs text-slate-200 hover:text-cyan-glow"
                   >
                     <PhoneCall className="w-4 h-4 text-emerald-400" />
-                    <span>Direct Call: +91 85939 44144</span>
+                    <span>Call: +91 85939 44144 / 011-69266519</span>
                   </a>
                 </div>
               )}
@@ -419,7 +419,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="p-3 rounded-xl hover:bg-white/5 text-slate-100 flex items-center gap-3 text-xs"
             >
               <PhoneCall className="w-4 h-4 text-emerald-400" />
-              <span>Direct Phone: +91 85939 44144</span>
+              <span>Phone: +91 85939 44144 / 011-69266519</span>
             </a>
 
             <div className="pt-2 flex flex-col gap-2">
