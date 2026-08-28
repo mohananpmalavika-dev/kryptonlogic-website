@@ -28,11 +28,6 @@ export function App() {
     }
   };
 
-  const handleOpenDemo = () => {
-    window.open('http://3.7.216.169', '_blank', 'noopener,noreferrer');
-    setIsCloudModalOpen(true);
-  };
-
   return (
     <LanguageProvider>
       <div className="min-h-screen bg-brand-950 text-slate-100 flex flex-col selection:bg-cyan-glow/25 selection:text-cyan-glow relative">
@@ -49,7 +44,7 @@ export function App() {
         {/* Dynamic Mega-Menu Navigation with Multi-Language Switcher */}
         <Navbar 
           onOpenEstimate={() => scrollTo('estimator')}
-          onOpenDemo={handleOpenDemo}
+          onOpenDemo={() => setIsCloudModalOpen(true)}
           onOpenContact={() => scrollTo('contact')}
         />
 
@@ -59,13 +54,13 @@ export function App() {
             onExploreKryptonVision={() => scrollTo('kryptonvision')}
             onExploreSolutions={() => scrollTo('enterprise-suite')}
             onOpenEstimate={() => scrollTo('estimator')}
-            onOpenDemo={handleOpenDemo}
+            onOpenDemo={() => setIsCloudModalOpen(true)}
           />
 
           {/* 2. Flagship Spotlight: KryptonVision Autonomous AI Video Surveillance */}
           <KryptonVisionShowcase 
             onOpenConsultation={() => scrollTo('contact')}
-            onOpenCloudDemo={handleOpenDemo}
+            onOpenCloudDemo={() => setIsCloudModalOpen(true)}
           />
 
           {/* 3. KryptonLogic Enterprise AI Suite (CRM, GST Billing, Inventory, Security, Service Desk) */}
@@ -125,7 +120,7 @@ export function App() {
         </main>
 
         {/* Footer */}
-        <Footer onOpenDemo={handleOpenDemo} />
+        <Footer onOpenDemo={() => setIsCloudModalOpen(true)} />
 
       </div>
     </LanguageProvider>
