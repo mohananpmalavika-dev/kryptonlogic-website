@@ -7,7 +7,9 @@ import {
   ShieldCheck, 
   RotateCw, 
   Camera,
-  CheckCircle2
+  CheckCircle2,
+  ExternalLink,
+  Globe
 } from 'lucide-react';
 
 interface KryptonVisionCloudModalProps {
@@ -25,6 +27,8 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
   if (!isOpen) return null;
 
+  const demoUrl = "http://3.7.216.169";
+
   return (
     <div className="fixed inset-0 z-[100] bg-brand-950/90 backdrop-blur-2xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in zoom-in-95 duration-200">
       
@@ -33,8 +37,8 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
         isFullscreen ? 'h-full max-w-full rounded-none' : 'h-[92vh] max-w-7xl'
       }`}>
         
-        {/* Cockpit Header Bar (100% White-Labeled & Masked) */}
-        <div className="bg-brand-950 px-4 py-3 border-b border-cyan-500/30 flex items-center justify-between flex-shrink-0 font-mono text-xs select-none">
+        {/* Cockpit Header Bar */}
+        <div className="bg-brand-950 px-4 py-3 border-b border-cyan-500/30 flex items-center justify-between flex-shrink-0 font-mono text-xs select-none gap-2">
           
           {/* Left: Window Dots & Title */}
           <div className="flex items-center gap-3">
@@ -56,25 +60,36 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
             <div className="flex items-center gap-2">
               <Camera className="w-4 h-4 text-cyan-glow animate-pulse" />
-              <span className="font-bold text-white tracking-wide">
-                KRYPTOVISION<span className="text-cyan-glow">™</span> AI CLOUD COMMAND
+              <span className="font-bold text-white tracking-wide truncate">
+                KRYPTONVISION<span className="text-cyan-glow">™</span> AI CLOUD COMMAND
               </span>
               <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 <Lock className="w-2.5 h-2.5" />
-                <span>256-BIT SECURE SESSION</span>
+                <span>ACTIVE DEMO NODE</span>
               </span>
             </div>
           </div>
 
-          {/* Center Address Pill (Branded White-Label Path) */}
+          {/* Center Address Pill */}
           <div className="hidden lg:flex items-center gap-2 px-4 py-1 rounded-full bg-brand-900 border border-cyan-500/30 text-slate-300 text-[11px]">
-            <Lock className="w-3 h-3 text-cyan-glow" />
-            <span className="text-white font-bold">https://kryptonlogic.com</span>
-            <span className="text-cyan-accent">/kryptonvision/cloud-portal</span>
+            <Globe className="w-3 h-3 text-cyan-glow animate-pulse" />
+            <span className="text-white font-bold">{demoUrl}</span>
+            <span className="text-cyan-accent">• Live Server</span>
           </div>
 
           {/* Right Controls */}
           <div className="flex items-center gap-2">
+            <a
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-glow hover:text-white border border-cyan-500/40 text-xs font-semibold transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+              title="Open Demo in New Tab"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Open Tab</span>
+            </a>
+
             <button
               onClick={() => { setIsLoading(true); setIframeKey(k => k + 1); }}
               className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
@@ -113,10 +128,10 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
               </div>
               <div className="text-center font-mono space-y-1">
                 <div className="text-sm font-bold text-white tracking-widest uppercase">
-                  INITIALIZING KRYPTOVISION™ CLOUD GATEWAY...
+                  CONNECTING TO KRYPTONVISION™ DEMO SERVER...
                 </div>
                 <div className="text-xs text-cyan-accent">
-                  Connecting to Edge Media Relay (Sub-50ms WebRTC)
+                  Target Host: {demoUrl}
                 </div>
               </div>
             </div>
@@ -124,7 +139,7 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
           <iframe
             key={iframeKey}
-            src="https://sentinel-grid-monitoring-b54f.onrender.com/login"
+            src={demoUrl}
             title="KryptonVision Cloud Command Center"
             className="w-full h-full border-0 bg-brand-950"
             onLoad={() => setIsLoading(false)}
@@ -134,18 +149,27 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
         </div>
 
         {/* Bottom Status Footer */}
-        <div className="bg-brand-950 px-4 py-2 border-t border-cyan-500/20 flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 select-none">
+        <div className="bg-brand-950 px-4 py-2.5 border-t border-cyan-500/20 flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400 select-none gap-2">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 text-emerald-400">
+            <span className="flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Node 01 (Kollam Gateway): Operational</span>
+              <span>Host Node: 3.7.216.169 (AWS Cloud Gateway)</span>
             </span>
             <span className="hidden sm:inline text-slate-600">|</span>
-            <span className="hidden sm:inline text-slate-300">Session: KL-SEC-ENC-7749</span>
+            <span className="hidden sm:inline text-slate-300">Port: 80 (HTTP)</span>
           </div>
 
-          <div className="text-cyan-glow font-bold">
-            KryptonLogic Solutions • Enterprise Cloud Session
+          <div className="flex items-center gap-2">
+            <span className="text-slate-400 hidden sm:inline">Direct Link:</span>
+            <a 
+              href={demoUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-cyan-glow hover:underline font-bold flex items-center gap-1 hover:text-white transition-colors"
+            >
+              <span>{demoUrl}</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
           </div>
         </div>
 
