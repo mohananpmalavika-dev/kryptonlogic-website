@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   Maximize2,
@@ -6,7 +6,9 @@ import {
   Lock,
   RotateCw,
   Camera,
-  Globe
+  Globe,
+  ExternalLink,
+  ShieldAlert
 } from 'lucide-react';
 
 interface KryptonVisionCloudModalProps {
@@ -21,8 +23,22 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadTimeout, setLoadTimeout] = useState(false);
 
   const demoUrl = "http://3.7.216.169";
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      setLoadTimeout(false);
+      // Auto-dismiss loading screen after 3.5s so user is never stuck
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setLoadTimeout(true);
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, iframeKey]);
 
   if (!isOpen) return null;
 
@@ -76,6 +92,17 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
           {/* Right Controls */}
           <div className="flex items-center gap-2">
+            <a
+              href={demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-glow hover:text-white border border-cyan-500/40 text-xs font-semibold transition-all"
+              title="Open direct live connection in new tab"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Direct Link</span>
+            </a>
+
             <button
               onClick={() => { setIsLoading(true); setIframeKey(k => k + 1); }}
               className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
