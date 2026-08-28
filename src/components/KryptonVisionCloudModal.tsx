@@ -65,16 +65,16 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
               </span>
               <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 <Lock className="w-2.5 h-2.5" />
-                <span>ACTIVE DEMO NODE</span>
+                <span>256-BIT SECURE SESSION</span>
               </span>
             </div>
           </div>
 
-          {/* Center Address Pill */}
+          {/* Center Address Pill (Branded Masked URL) */}
           <div className="hidden lg:flex items-center gap-2 px-4 py-1 rounded-full bg-brand-900 border border-cyan-500/30 text-slate-300 text-[11px]">
-            <Globe className="w-3 h-3 text-cyan-glow animate-pulse" />
-            <span className="text-white font-bold">{demoUrl}</span>
-            <span className="text-cyan-accent">• Live Server</span>
+            <Lock className="w-3 h-3 text-cyan-glow" />
+            <span className="text-white font-bold">https://kryptonlogic.com</span>
+            <span className="text-cyan-accent">/kryptonvision/cloud-portal</span>
           </div>
 
           {/* Right Controls */}
@@ -84,10 +84,10 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-glow hover:text-white border border-cyan-500/40 text-xs font-semibold transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)]"
-              title="Open Demo in New Tab"
+              title="Open Demo Portal in New Window"
             >
               <ExternalLink className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Open Tab</span>
+              <span className="hidden sm:inline">Launch Tab</span>
             </a>
 
             <button
@@ -128,10 +128,10 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
               </div>
               <div className="text-center font-mono space-y-1">
                 <div className="text-sm font-bold text-white tracking-widest uppercase">
-                  CONNECTING TO KRYPTONVISION™ DEMO SERVER...
+                  INITIALIZING KRYPTONVISION™ CLOUD GATEWAY...
                 </div>
                 <div className="text-xs text-cyan-accent">
-                  Target Host: {demoUrl}
+                  Connecting to Edge Media Relay (Sub-50ms WebRTC)
                 </div>
               </div>
             </div>
@@ -153,21 +153,20 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Host Node: 3.7.216.169</span>
+              <span>Gateway Node: Operational (Sub-50ms WebRTC)</span>
             </span>
             <span className="hidden sm:inline text-slate-600">|</span>
-            <span className="hidden sm:inline text-slate-300">Port: 80 (HTTP)</span>
+            <span className="hidden sm:inline text-slate-300">Session: KL-SEC-ENC-7749</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-slate-400 hidden sm:inline">Direct Link:</span>
             <a 
               href={demoUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-cyan-glow hover:underline font-bold flex items-center gap-1 hover:text-white transition-colors"
             >
-              <span>{demoUrl}</span>
+              <span>Open Live Portal in Dedicated Window</span>
               <ExternalLink className="w-3 h-3" />
             </a>
           </div>
