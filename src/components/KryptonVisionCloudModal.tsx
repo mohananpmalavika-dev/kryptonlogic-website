@@ -153,7 +153,7 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Host Node: 3.7.216.169 (AWS Cloud Gateway)</span>
+              <span>Host Node: 3.7.216.169</span>
             </span>
             <span className="hidden sm:inline text-slate-600">|</span>
             <span className="hidden sm:inline text-slate-300">Port: 80 (HTTP)</span>
