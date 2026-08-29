@@ -130,56 +130,67 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
         </div>
 
-        {/* Embedded Iframe Viewport & Connection Hub */}
-        <div className="relative flex-grow bg-brand-950 overflow-hidden flex items-center justify-center">
+        {/* Interactive Live Gateway Command Hub */}
+        <div className="relative flex-grow bg-brand-950 overflow-hidden flex items-center justify-center p-4 sm:p-8">
 
-          {/* Underlying Live Gateway Card (Visible if browser blocks HTTP iframe on HTTPS) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-950 via-brand-900/60 to-brand-950 flex flex-col items-center justify-center p-6 text-center z-10">
-            <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl bg-brand-900/90 border border-cyan-500/30 shadow-[0_0_50px_rgba(0,240,255,0.2)] flex flex-col items-center space-y-5">
-              <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-glow shadow-glow-cyan">
-                <Camera className="w-8 h-8 animate-pulse" />
+          {/* Background Ambient Glow & Grid Matrix */}
+          <div className="absolute inset-0 bg-radial-vignette opacity-80 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(#00f0ff_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
+
+          {/* Command Gateway Card */}
+          <div className="relative z-10 max-w-xl w-full p-8 sm:p-10 rounded-3xl bg-brand-900/95 border border-cyan-500/40 shadow-[0_0_80px_rgba(0,240,255,0.3)] flex flex-col items-center text-center space-y-6 animate-in fade-in zoom-in-95 duration-200">
+            
+            <div className="relative">
+              <div className="w-20 h-20 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-glow shadow-glow-cyan">
+                <Camera className="w-10 h-10 animate-pulse" />
               </div>
-
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>EDGE GATEWAY ONLINE • 3.7.216.169</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-display font-extrabold text-white">
-                  KryptonVision<span className="text-cyan-glow">™</span> Live Command
-                </h3>
-                <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
-                  Real-time video surveillance cockpit, AI computer vision streams, and multi-branch edge discovery.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-2.5 w-full">
-                <a
-                  href={demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full btn-luxe-primary py-3 rounded-xl text-xs uppercase font-extrabold tracking-wider flex items-center justify-center gap-2 shadow-glow-cyan group"
-                >
-                  <span>Open Live Portal</span>
-                  <ExternalLink className="w-4 h-4 text-brand-950 group-hover:translate-x-0.5 transition-transform" />
-                </a>
-
-                <p className="text-[11px] font-mono text-slate-400">
-                  Direct sub-50ms WebRTC connection to AWS edge node
-                </p>
-              </div>
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-brand-950 animate-ping" />
+              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-brand-950" />
             </div>
-          </div>
 
-          {/* Active Iframe (Loads directly when supported or over HTTPS) */}
-          <iframe
-            key={iframeKey}
-            src={demoUrl}
-            title="KryptonVision Cloud Command Center"
-            className="w-full h-full border-0 bg-transparent relative z-20"
-            onLoad={() => setIsLoading(false)}
-            allow="fullscreen; camera; microphone; display-capture; autoplay; clipboard-read; clipboard-write"
-          />
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span>LIVE MEDIA RELAY GATEWAY ONLINE</span>
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight">
+                KryptonVision<span className="text-cyan-glow">™</span> AI Cloud Command
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+                Connect to the live video surveillance cockpit, real-time AI computer vision streams, and multi-branch edge discovery portal.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3.5 w-full max-w-md">
+              <a
+                href={demoUrl}
+                className="w-full btn-luxe-primary py-4 rounded-xl text-xs uppercase font-extrabold tracking-wider flex items-center justify-center gap-2 shadow-glow-cyan group"
+              >
+                <span>Launch Live Portal</span>
+                <ExternalLink className="w-4 h-4 text-brand-950 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-5 py-4 rounded-xl bg-brand-850 hover:bg-brand-800 border border-white/10 hover:border-cyan-500/40 text-slate-200 text-xs font-mono whitespace-nowrap flex items-center justify-center gap-2 transition-all"
+                title="Open in new window"
+              >
+                <span>New Tab</span>
+                <ExternalLink className="w-3.5 h-3.5 text-cyan-glow" />
+              </a>
+            </div>
+
+            <div className="pt-4 border-t border-white/10 w-full flex items-center justify-between text-[11px] font-mono text-slate-400 px-2">
+              <span className="flex items-center gap-1.5 text-emerald-400">
+                <Lock className="w-3.5 h-3.5" />
+                <span>Secure Edge Relay Node</span>
+              </span>
+              <span>Sub-50ms WebRTC</span>
+            </div>
+
+          </div>
 
         </div>
 
