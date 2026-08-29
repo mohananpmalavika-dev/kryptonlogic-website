@@ -73,11 +73,11 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
             </div>
           </div>
 
-          {/* Center Address Pill */}
+          {/* Center Address Pill (Branded White-Label Path) */}
           <div className="hidden lg:flex items-center gap-2 px-4 py-1 rounded-full bg-brand-900 border border-cyan-500/30 text-slate-300 text-[11px]">
-            <Globe className="w-3 h-3 text-cyan-glow animate-pulse" />
-            <span className="text-white font-bold">{demoUrl}</span>
-            <span className="text-cyan-accent">• Live Server</span>
+            <Lock className="w-3 h-3 text-cyan-glow" />
+            <span className="text-white font-bold">https://kryptonlogic.com</span>
+            <span className="text-cyan-accent">/kryptonvision/live-portal</span>
           </div>
 
           {/* Right Controls */}
@@ -131,10 +131,10 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
               </div>
               <div className="text-center font-mono space-y-1">
                 <div className="text-sm font-bold text-white tracking-widest uppercase">
-                  CONNECTING TO KRYPTONVISION™ DEMO SERVER...
+                  CONNECTING TO KRYPTONVISION™ AI COMMAND CENTER...
                 </div>
                 <div className="text-xs text-cyan-accent">
-                  Target Host: {demoUrl}
+                  Streaming Real-Time Media & Edge Analytics (Sub-50ms WebRTC)
                 </div>
               </div>
             </div>
@@ -156,21 +156,20 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Host Node: 3.7.216.169 (AWS SSL Gateway)</span>
+              <span>Gateway Node: Operational (Sub-50ms WebRTC)</span>
             </span>
             <span className="hidden sm:inline text-slate-600">|</span>
-            <span className="hidden sm:inline text-slate-300">Port: 443 (HTTPS)</span>
+            <span className="hidden sm:inline text-slate-300">Session: KL-SEC-ENC-7749</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-slate-400 hidden sm:inline">Direct Link:</span>
             <a 
               href={demoUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-cyan-glow hover:underline font-bold flex items-center gap-1 hover:text-white transition-colors"
             >
-              <span>{demoUrl}</span>
+              <span>Open Live Portal in Dedicated Window</span>
               <ExternalLink className="w-3 h-3" />
             </a>
           </div>
