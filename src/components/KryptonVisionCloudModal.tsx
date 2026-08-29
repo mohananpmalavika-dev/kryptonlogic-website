@@ -130,31 +130,53 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
         </div>
 
-        {/* Embedded Iframe Viewport */}
-        <div className="relative flex-grow bg-brand-950 overflow-hidden">
+        {/* Embedded Iframe Viewport & Connection Hub */}
+        <div className="relative flex-grow bg-brand-950 overflow-hidden flex items-center justify-center">
 
-          {isLoading && (
-            <div className="absolute inset-0 bg-brand-950 flex flex-col items-center justify-center space-y-4 z-20 transition-opacity duration-300">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 rounded-full border-4 border-cyan-500/20 animate-ping" />
-                <div className="w-full h-full rounded-full border-4 border-cyan-glow border-t-transparent animate-spin" />
+          {/* Underlying Live Gateway Card (Visible if browser blocks HTTP iframe on HTTPS) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-950 via-brand-900/60 to-brand-950 flex flex-col items-center justify-center p-6 text-center z-10">
+            <div className="max-w-md w-full p-6 sm:p-8 rounded-3xl bg-brand-900/90 border border-cyan-500/30 shadow-[0_0_50px_rgba(0,240,255,0.2)] flex flex-col items-center space-y-5">
+              <div className="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-glow shadow-glow-cyan">
+                <Camera className="w-8 h-8 animate-pulse" />
               </div>
-              <div className="text-center font-mono space-y-1">
-                <div className="text-sm font-bold text-white tracking-widest uppercase">
-                  CONNECTING TO KRYPTONVISION™ AI COMMAND CENTER...
+
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-mono font-bold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <span>EDGE GATEWAY ONLINE • 3.7.216.169</span>
                 </div>
-                <div className="text-xs text-cyan-accent">
-                  Streaming Real-Time Media & Edge Analytics
-                </div>
+                <h3 className="text-xl sm:text-2xl font-display font-extrabold text-white">
+                  KryptonVision<span className="text-cyan-glow">™</span> Live Command
+                </h3>
+                <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
+                  Real-time video surveillance cockpit, AI computer vision streams, and multi-branch edge discovery.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2.5 w-full">
+                <a
+                  href={demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full btn-luxe-primary py-3 rounded-xl text-xs uppercase font-extrabold tracking-wider flex items-center justify-center gap-2 shadow-glow-cyan group"
+                >
+                  <span>Open Live Portal</span>
+                  <ExternalLink className="w-4 h-4 text-brand-950 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+
+                <p className="text-[11px] font-mono text-slate-400">
+                  Direct sub-50ms WebRTC connection to AWS edge node
+                </p>
               </div>
             </div>
-          )}
+          </div>
 
+          {/* Active Iframe (Loads directly when supported or over HTTPS) */}
           <iframe
             key={iframeKey}
             src={demoUrl}
             title="KryptonVision Cloud Command Center"
-            className="w-full h-full border-0 bg-brand-950"
+            className="w-full h-full border-0 bg-transparent relative z-20"
             onLoad={() => setIsLoading(false)}
             allow="fullscreen; camera; microphone; display-capture; autoplay; clipboard-read; clipboard-write"
           />
