@@ -6,8 +6,6 @@ import {
   Lock,
   RotateCw,
   Camera,
-  Globe,
-  ExternalLink,
 } from 'lucide-react';
 
 interface KryptonVisionCloudModalProps {
@@ -24,7 +22,7 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
   const [isLoading, setIsLoading] = useState(true);
 
   // 100% Valid SSL URL (No Mixed Content errors!)
-  const demoUrl = "https://3-7-216-169.sslip.io";
+  const demoUrl = "https://34-14-220-41.sslip.io/login";
 
   if (!isOpen) return null;
 
@@ -82,16 +80,6 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
 
           {/* Right Controls */}
           <div className="flex items-center gap-2">
-            <a
-              href={demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-glow hover:text-white border border-cyan-500/40 text-xs font-semibold transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)]"
-              title="Open Demo in New Tab"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Open Tab</span>
-            </a>
 
             <button
               onClick={() => { setIsLoading(true); setIframeKey(k => k + 1); }}
@@ -162,17 +150,7 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
             <span className="hidden sm:inline text-slate-300">Session: KL-SEC-ENC-7749</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <a 
-              href={demoUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-cyan-glow hover:underline font-bold flex items-center gap-1 hover:text-white transition-colors"
-            >
-              <span>Open Live Portal in Dedicated Window</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
+          <div className="flex items-center gap-2" />
         </div>
 
       </div>
