@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   X,
   Maximize2,
@@ -20,9 +20,28 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const fallbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 100% Valid SSL URL (No Mixed Content errors!)
   const demoUrl = "https://34-14-220-41.sslip.io/login";
+
+  // Reset loading state every time the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      setIframeKey(k => k + 1);
+      // Fallback: hide spinner after 15s in case onLoad never fires
+      fallbackTimer.current = setTimeout(() => setIsLoading(false), 15000);
+    }
+    return () => {
+      if (fallbackTimer.current) clearTimeout(fallbackTimer.current);
+    };
+  }, [isOpen]);
+
+  const handleIframeLoad = () => {
+    if (fallbackTimer.current) clearTimeout(fallbackTimer.current);
+    setIsLoading(false);
+  };
 
   if (!isOpen) return null;
 
@@ -82,7 +101,12 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
           <div className="flex items-center gap-2">
 
             <button
-              onClick={() => { setIsLoading(true); setIframeKey(k => k + 1); }}
+              onClick={() => {
+                setIsLoading(true);
+                setIframeKey(k => k + 1);
+                if (fallbackTimer.current) clearTimeout(fallbackTimer.current);
+                fallbackTimer.current = setTimeout(() => setIsLoading(false), 15000);
+              }}
               className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
               title="Reload Frame"
             >
@@ -133,7 +157,7 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
             src={demoUrl}
             title="KryptonVision Live Demo Cockpit"
             className="w-full h-full border-0 bg-brand-950"
-            onLoad={() => setIsLoading(false)}
+            onLoad={handleIframeLoad}
             allow="fullscreen; camera; microphone; display-capture; autoplay; clipboard-read; clipboard-write"
           />
 
