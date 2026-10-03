@@ -5,6 +5,7 @@ import { KryptonVisionCloudModal } from './components/KryptonVisionCloudModal';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { KryptonVisionShowcase } from './components/KryptonVisionShowcase';
+import { KryptonConnectivitySuite } from './components/KryptonConnectivitySuite';
 import { EnterpriseAISuite } from './components/EnterpriseAISuite';
 import { HardwareAndCCTV } from './components/HardwareAndCCTV';
 import { StartupLaunchpad } from './components/StartupLaunchpad';
@@ -63,7 +64,13 @@ export function App() {
             onOpenCloudDemo={() => setIsCloudModalOpen(true)}
           />
 
-          {/* 3. KryptonLogic Enterprise AI Suite (CRM, GST Billing, Inventory, Security, Service Desk) */}
+          {/* 3. Flagship Products: Krypton Secure Connectivity Suite (Krypton Remote Desktop & Krypton VPN) */}
+          <KryptonConnectivitySuite 
+            onOpenContact={() => scrollTo('contact')}
+            onOpenEstimator={() => scrollTo('estimator')}
+          />
+
+          {/* 4. KryptonLogic Enterprise AI Suite (CRM, GST Billing, Inventory, Security, Service Desk) */}
           <EnterpriseAISuite 
             onOpenContact={() => scrollTo('contact')}
             onOpenEstimator={() => scrollTo('estimator')}

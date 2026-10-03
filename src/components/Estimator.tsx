@@ -8,7 +8,8 @@ import {
   Database, 
   Sparkles, 
   Clock, 
-  FileSpreadsheet
+  FileSpreadsheet,
+  ShieldCheck
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -27,6 +28,7 @@ export const Estimator: React.FC<EstimatorProps> = ({ onDirectQuote }) => {
   const services = [
     { id: 'startup', name: 'Startup MVP Suite', basePrice: 45000, baseWeeks: 3, icon: Rocket },
     { id: 'kryptonvision', name: 'KryptonVision™ AI Setup', basePrice: 35000, baseWeeks: 2, icon: Camera },
+    { id: 'connectivity_suite', name: 'Secure Connectivity Suite (VPN & Remote Desktop)', basePrice: 32000, baseWeeks: 1.5, icon: ShieldCheck },
     { id: 'cctv_hardware', name: 'CCTV & Hardware AMC', basePrice: 20000, baseWeeks: 1, icon: Cpu },
     { id: 'ecommerce', name: 'Website & E-Commerce', basePrice: 25000, baseWeeks: 2, icon: Globe },
     { id: 'custom_software', name: 'Custom ERP / SaaS', basePrice: 55000, baseWeeks: 4, icon: Database },

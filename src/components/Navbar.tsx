@@ -3,6 +3,7 @@ import {
   Shield, 
   Cpu, 
   Camera, 
+  Monitor,
   Rocket, 
   Globe, 
   Layers, 
@@ -110,11 +111,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
 
               {activeDropdown === 'products' && (
-                <div className="absolute top-full left-0 mt-2 w-84 bg-brand-950/98 backdrop-blur-2xl border border-cyan-500/30 rounded-2xl p-3 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150">
+                <div className="absolute top-full left-0 mt-2 w-96 bg-brand-950/98 backdrop-blur-2xl border border-cyan-500/30 rounded-2xl p-3 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-150 space-y-1">
                   <a
                     href="#kryptonvision"
                     onClick={() => setActiveDropdown(null)}
-                    className="p-3 rounded-xl hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/30 flex items-start gap-3 transition-colors group mb-1.5"
+                    className="p-3 rounded-xl hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/30 flex items-start gap-3 transition-colors group"
                   >
                     <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-glow group-hover:scale-110 transition-transform">
                       <Camera className="w-5 h-5" />
@@ -126,6 +127,63 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </div>
                       <p className="text-xs text-slate-300 font-light mt-1 leading-relaxed">
                         AI Video Surveillance & Multi-Branch Live Cockpit.
+                      </p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="#connectivity-suite"
+                    onClick={() => setActiveDropdown(null)}
+                    className="p-3 rounded-xl hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/30 flex items-start gap-3 transition-colors group"
+                  >
+                    <div className="p-2.5 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 text-cyan-glow group-hover:scale-110 transition-transform">
+                      <Shield className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-bold text-white group-hover:text-cyan-glow flex items-center gap-1.5">
+                        <span>Secure Connectivity Suite</span>
+                        <span className="text-[9px] font-mono font-extrabold px-2 py-0.5 bg-cyan-500/20 text-cyan-accent rounded-full border border-cyan-500/40">SUITE</span>
+                      </div>
+                      <p className="text-xs text-slate-300 font-light mt-1 leading-relaxed">
+                        Combined Remote Desktop & Encrypted VPN Infrastructure.
+                      </p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="#remote-desktop"
+                    onClick={() => setActiveDropdown(null)}
+                    className="p-2.5 pl-4 rounded-xl hover:bg-white/5 border border-transparent hover:border-violet-500/30 flex items-start gap-3 transition-colors group"
+                  >
+                    <div className="p-2 rounded-lg bg-violet-500/10 text-violet-400 group-hover:scale-110 transition-transform">
+                      <Monitor className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white group-hover:text-violet-300 flex items-center gap-1.5">
+                        <span>Krypton Remote Desktop</span>
+                        <span className="text-[9px] font-mono text-slate-400">WIN • LIN • MAC</span>
+                      </div>
+                      <p className="text-[11px] text-slate-300 font-light mt-0.5 leading-relaxed">
+                        Fast low-latency screen sharing, control, & unattended access.
+                      </p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="#krypton-vpn"
+                    onClick={() => setActiveDropdown(null)}
+                    className="p-2.5 pl-4 rounded-xl hover:bg-white/5 border border-transparent hover:border-emerald-500/30 flex items-start gap-3 transition-colors group"
+                  >
+                    <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 group-hover:scale-110 transition-transform">
+                      <Network className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-white group-hover:text-emerald-300 flex items-center gap-1.5">
+                        <span>Krypton VPN</span>
+                        <span className="text-[9px] font-mono text-slate-400">AES-256 TUNNEL</span>
+                      </div>
+                      <p className="text-[11px] text-slate-300 font-light mt-0.5 leading-relaxed">
+                        Site-to-site & remote-access encrypted business tunnels.
                       </p>
                     </div>
                   </a>
@@ -366,6 +424,33 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Camera className="w-4 h-4 text-cyan-glow" />
               <span>KryptonVision™ AI Video Surveillance</span>
+            </a>
+
+            <a 
+              href="#connectivity-suite" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-3 rounded-xl hover:bg-white/5 text-slate-100 flex items-center gap-3 text-xs"
+            >
+              <Shield className="w-4 h-4 text-cyan-glow" />
+              <span>Krypton Secure Connectivity Suite</span>
+            </a>
+
+            <a 
+              href="#remote-desktop" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2.5 pl-7 rounded-xl hover:bg-white/5 text-slate-200 flex items-center gap-3 text-xs"
+            >
+              <Monitor className="w-3.5 h-3.5 text-violet-400" />
+              <span>Krypton Remote Desktop (Win, Linux, Mac)</span>
+            </a>
+
+            <a 
+              href="#krypton-vpn" 
+              onClick={() => setMobileMenuOpen(false)}
+              className="p-2.5 pl-7 rounded-xl hover:bg-white/5 text-slate-200 flex items-center gap-3 text-xs"
+            >
+              <Network className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Krypton VPN (Encrypted Tunnels)</span>
             </a>
 
             <a 

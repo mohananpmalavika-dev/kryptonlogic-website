@@ -25,12 +25,9 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
   // 100% Valid SSL URL (No Mixed Content errors!)
   const demoUrl = "https://34-14-220-41.sslip.io/login";
 
-  // Reset loading state every time the modal opens
+  // Start fallback timer on first open (only if iframe hasn't loaded yet)
   useEffect(() => {
-    if (isOpen) {
-      setIsLoading(true);
-      setIframeKey(k => k + 1);
-      // Fallback: hide spinner after 15s in case onLoad never fires
+    if (isOpen && isLoading) {
       fallbackTimer.current = setTimeout(() => setIsLoading(false), 15000);
     }
     return () => {
@@ -43,142 +40,151 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
     setIsLoading(false);
   };
 
-  if (!isOpen) return null;
+  const handleReload = () => {
+    setIsLoading(true);
+    setIframeKey(k => k + 1);
+    if (fallbackTimer.current) clearTimeout(fallbackTimer.current);
+    fallbackTimer.current = setTimeout(() => setIsLoading(false), 15000);
+  };
 
+  // Always render — iframe preloads silently in the background.
+  // Modal overlay is shown/hidden via CSS (opacity + pointer-events).
   return (
-    <div className="fixed inset-0 z-[100] bg-brand-950/90 backdrop-blur-2xl flex items-center justify-center p-2 sm:p-4 md:p-6 animate-in fade-in zoom-in-95 duration-200">
-      
-      {/* Modal Window Container */}
-      <div className={`relative w-full bg-brand-900 border border-cyan-500/40 rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(0,240,255,0.35)] flex flex-col transition-all duration-300 ${
-        isFullscreen ? 'h-full max-w-full rounded-none' : 'h-[92vh] max-w-7xl'
-      }`}>
-        
-        {/* Cockpit Header Bar */}
-        <div className="bg-brand-950 px-4 py-3 border-b border-cyan-500/30 flex items-center justify-between flex-shrink-0 font-mono text-xs select-none gap-2">
-          
-          {/* Left: Window Controls & Title */}
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1.5">
-              <span 
-                className="w-3 h-3 rounded-full bg-rose-500/80 cursor-pointer hover:opacity-100 transition-opacity" 
-                onClick={onClose}
-                title="Close"
-              />
-              <span 
-                className="w-3 h-3 rounded-full bg-amber-500/80 cursor-pointer" 
-                onClick={() => setIframeKey(k => k + 1)}
-                title="Reload"
-              />
-              <span 
-                className="w-3 h-3 rounded-full bg-emerald-500/80 cursor-pointer" 
-                onClick={() => setIsFullscreen(!isFullscreen)}
-                title="Toggle Fullscreen"
-              />
+    <>
+      {/* Hidden preload iframe — loads the demo URL as soon as the page mounts */}
+      <div
+        className={`fixed inset-0 z-[100] bg-brand-950/90 backdrop-blur-2xl flex items-center justify-center p-2 sm:p-4 md:p-6 transition-all duration-200 ${
+          isOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        {/* Modal Window Container */}
+        <div className={`relative w-full bg-brand-900 border border-cyan-500/40 rounded-3xl overflow-hidden shadow-[0_0_80px_rgba(0,240,255,0.35)] flex flex-col transition-all duration-300 ${
+          isFullscreen ? 'h-full max-w-full rounded-none' : 'h-[92vh] max-w-7xl'
+        }`}>
+
+          {/* Cockpit Header Bar */}
+          <div className="bg-brand-950 px-4 py-3 border-b border-cyan-500/30 flex items-center justify-between flex-shrink-0 font-mono text-xs select-none gap-2">
+
+            {/* Left: Window Controls & Title */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                <span
+                  className="w-3 h-3 rounded-full bg-rose-500/80 cursor-pointer hover:opacity-100 transition-opacity"
+                  onClick={onClose}
+                  title="Close"
+                />
+                <span
+                  className="w-3 h-3 rounded-full bg-amber-500/80 cursor-pointer"
+                  onClick={handleReload}
+                  title="Reload"
+                />
+                <span
+                  className="w-3 h-3 rounded-full bg-emerald-500/80 cursor-pointer"
+                  onClick={() => setIsFullscreen(!isFullscreen)}
+                  title="Toggle Fullscreen"
+                />
+              </div>
+
+              <div className="h-4 w-px bg-white/10 mx-1 hidden sm:block" />
+
+              <div className="flex items-center gap-2">
+                <Camera className="w-4 h-4 text-cyan-glow animate-pulse" />
+                <span className="font-bold text-white tracking-wider hidden sm:inline font-display">
+                  KRYPTONVISION<span className="text-cyan-glow">™</span> CLOUD COMMAND
+                </span>
+                <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                  <Lock className="w-2.5 h-2.5" />
+                  <span>SSL SECURED</span>
+                </span>
+              </div>
             </div>
 
-            <div className="h-4 w-px bg-white/10 mx-1 hidden sm:block" />
+            {/* Center Address Pill (Branded White-Label Path) */}
+            <div className="hidden lg:flex items-center gap-2 px-4 py-1 rounded-full bg-brand-900 border border-cyan-500/30 text-slate-300 text-[11px]">
+              <Lock className="w-3 h-3 text-cyan-glow" />
+              <span className="text-white font-bold">https://kryptonlogic.com</span>
+              <span className="text-cyan-accent">/kryptonvision/live-portal</span>
+            </div>
 
+            {/* Right Controls */}
             <div className="flex items-center gap-2">
-              <Camera className="w-4 h-4 text-cyan-glow animate-pulse" />
-              <span className="font-bold text-white tracking-wider hidden sm:inline font-display">
-                KRYPTONVISION<span className="text-cyan-glow">™</span> CLOUD COMMAND
-              </span>
-              <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                <Lock className="w-2.5 h-2.5" />
-                <span>SSL SECURED</span>
-              </span>
+              <button
+                onClick={handleReload}
+                className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
+                title="Reload Frame"
+              >
+                <RotateCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+              </button>
+
+              <button
+                onClick={() => setIsFullscreen(!isFullscreen)}
+                className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5 hidden sm:block"
+                title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+              >
+                {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+              </button>
+
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 transition-colors border border-rose-500/20"
+                title="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
+
           </div>
 
-          {/* Center Address Pill (Branded White-Label Path) */}
-          <div className="hidden lg:flex items-center gap-2 px-4 py-1 rounded-full bg-brand-900 border border-cyan-500/30 text-slate-300 text-[11px]">
-            <Lock className="w-3 h-3 text-cyan-glow" />
-            <span className="text-white font-bold">https://kryptonlogic.com</span>
-            <span className="text-cyan-accent">/kryptonvision/live-portal</span>
-          </div>
+          {/* Embedded Iframe Viewport */}
+          <div className="relative flex-grow bg-brand-950 overflow-hidden">
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-2">
-
-            <button
-              onClick={() => {
-                setIsLoading(true);
-                setIframeKey(k => k + 1);
-                if (fallbackTimer.current) clearTimeout(fallbackTimer.current);
-                fallbackTimer.current = setTimeout(() => setIsLoading(false), 15000);
-              }}
-              className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
-              title="Reload Frame"
-            >
-              <RotateCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
-            </button>
-
-            <button
-              onClick={() => setIsFullscreen(!isFullscreen)}
-              className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5 hidden sm:block"
-              title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
-            >
-              {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-            </button>
-
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 transition-colors border border-rose-500/20"
-              title="Close"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-        </div>
-
-        {/* Embedded Iframe Viewport */}
-        <div className="relative flex-grow bg-brand-950 overflow-hidden">
-          
-          {isLoading && (
-            <div className="absolute inset-0 bg-brand-950 flex flex-col items-center justify-center space-y-4 z-20">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 rounded-full border-4 border-cyan-500/20 animate-ping" />
-                <div className="w-full h-full rounded-full border-4 border-cyan-glow border-t-transparent animate-spin" />
-              </div>
-              <div className="text-center font-mono space-y-1">
-                <div className="text-sm font-bold text-white tracking-widest uppercase">
-                  CONNECTING TO KRYPTONVISION™ AI COMMAND CENTER...
+            {isLoading && (
+              <div className="absolute inset-0 bg-brand-950 flex flex-col items-center justify-center space-y-4 z-20">
+                <div className="relative w-16 h-16">
+                  <div className="absolute inset-0 rounded-full border-4 border-cyan-500/20 animate-ping" />
+                  <div className="w-full h-full rounded-full border-4 border-cyan-glow border-t-transparent animate-spin" />
                 </div>
-                <div className="text-xs text-cyan-accent">
-                  Streaming Real-Time Media & Edge Analytics (Sub-50ms WebRTC)
+                <div className="text-center font-mono space-y-1">
+                  <div className="text-sm font-bold text-white tracking-widest uppercase">
+                    CONNECTING TO KRYPTONVISION™ AI COMMAND CENTER...
+                  </div>
+                  <div className="text-xs text-cyan-accent">
+                    Streaming Real-Time Media &amp; Edge Analytics (Sub-50ms WebRTC)
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <iframe
-            key={iframeKey}
-            src={demoUrl}
-            title="KryptonVision Live Demo Cockpit"
-            className="w-full h-full border-0 bg-brand-950"
-            onLoad={handleIframeLoad}
-            allow="fullscreen; camera; microphone; display-capture; autoplay; clipboard-read; clipboard-write"
-          />
+            <iframe
+              key={iframeKey}
+              src={demoUrl}
+              title="KryptonVision Live Demo Cockpit"
+              className="w-full h-full border-0 bg-brand-950"
+              onLoad={handleIframeLoad}
+              allow="fullscreen; camera; microphone; display-capture; autoplay; clipboard-read; clipboard-write"
+            />
 
-        </div>
-
-        {/* Cockpit Footer Status Bar */}
-        <div className="bg-brand-950 px-4 py-2 border-t border-cyan-500/20 flex items-center justify-between font-mono text-[11px] select-none">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Gateway Node: Operational (Sub-50ms WebRTC)</span>
-            </span>
-            <span className="hidden sm:inline text-slate-600">|</span>
-            <span className="hidden sm:inline text-slate-300">Session: KL-SEC-ENC-7749</span>
           </div>
 
-          <div className="flex items-center gap-2" />
+          {/* Cockpit Footer Status Bar */}
+          <div className="bg-brand-950 px-4 py-2 border-t border-cyan-500/20 flex items-center justify-between font-mono text-[11px] select-none">
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1.5 text-emerald-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span>Gateway Node: Operational (Sub-50ms WebRTC)</span>
+              </span>
+              <span className="hidden sm:inline text-slate-600">|</span>
+              <span className="hidden sm:inline text-slate-300">Session: KL-SEC-ENC-7749</span>
+            </div>
+
+            <div className="flex items-center gap-2" />
+          </div>
+
         </div>
 
       </div>
-
-    </div>
+    </>
   );
 };

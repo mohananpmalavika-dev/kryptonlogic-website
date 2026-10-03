@@ -79,11 +79,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenDemo }) => {
             <ul className="space-y-2 text-xs">
               <li><button onClick={onOpenDemo} className="text-cyan-glow font-medium hover:underline flex items-center gap-1 text-left"><span>KryptonVision™ Live Cloud Demo</span><span className="text-[10px]">⚡</span></button></li>
               <li><a href="#kryptonvision" className="hover:text-cyan-glow transition-colors">KryptonVision™ AI Surveillance</a></li>
+              <li><a href="#connectivity-suite" className="text-white hover:text-cyan-glow transition-colors font-semibold">Krypton Connectivity Suite</a></li>
+              <li><a href="#remote-desktop" className="hover:text-cyan-glow transition-colors pl-2">• Krypton Remote Desktop</a></li>
+              <li><a href="#krypton-vpn" className="hover:text-cyan-glow transition-colors pl-2">• Krypton VPN Tunnels</a></li>
               <li><a href="#hardware" className="hover:text-cyan-glow transition-colors">CCTV & Video Management (VMS)</a></li>
               <li><a href="#hardware" className="hover:text-cyan-glow transition-colors">Access Control & Biometrics</a></li>
-              <li><a href="#hardware" className="hover:text-cyan-glow transition-colors">Intrusion Alarms & BMS Link</a></li>
-              <li><a href="#hardware" className="hover:text-cyan-glow transition-colors">Structured Cabling & Fiber Optics</a></li>
-              <li><a href="#hardware" className="hover:text-cyan-glow transition-colors">24/7 AMC & Technical Support</a></li>
+              <li><a href="#hardware" className="hover:text-cyan-glow transition-colors">Structured Cabling & AMC Support</a></li>
             </ul>
           </div>
 
