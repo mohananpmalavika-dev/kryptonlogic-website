@@ -6,6 +6,7 @@ import {
   Lock,
   RotateCw,
   Camera,
+  ExternalLink,
 } from 'lucide-react';
 
 interface KryptonVisionCloudModalProps {
@@ -22,8 +23,8 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
   const [isLoading, setIsLoading] = useState(true);
   const fallbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // 100% Valid SSL URL (No Mixed Content errors!)
-  const demoUrl = "https://34-14-220-41.sslip.io/login";
+  // Live demo URL
+  const demoUrl = "https://demo.kryptonlogic.com";
 
   // Start fallback timer on first open (only if iframe hasn't loaded yet)
   useEffect(() => {
@@ -101,15 +102,24 @@ export const KryptonVisionCloudModal: React.FC<KryptonVisionCloudModalProps> = (
               </div>
             </div>
 
-            {/* Center Address Pill (Branded White-Label Path) */}
+            {/* Center Address Pill */}
             <div className="hidden lg:flex items-center gap-2 px-4 py-1 rounded-full bg-brand-900 border border-cyan-500/30 text-slate-300 text-[11px]">
               <Lock className="w-3 h-3 text-cyan-glow" />
-              <span className="text-white font-bold">https://kryptonlogic.com</span>
-              <span className="text-cyan-accent">/kryptonvision/live-portal</span>
+              <span className="text-white font-bold">https://demo.kryptonlogic.com</span>
             </div>
 
             {/* Right Controls */}
             <div className="flex items-center gap-2">
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
+                title="Open in New Tab"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+
               <button
                 onClick={handleReload}
                 className="p-1.5 rounded-lg bg-brand-850 hover:bg-brand-800 text-slate-300 hover:text-cyan-glow transition-colors border border-white/5"
